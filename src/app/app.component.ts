@@ -20,9 +20,12 @@ export class AppComponent implements OnInit {
     });
   }
 
-  AddItom() {
+  AddItom(type) {
     let add, FormArray;
-    add = this.FormBuilder.group({ 'data': ['點此編輯'] });
+    add = this.FormBuilder.group({
+      'data': ['點此編輯'],
+      'type': [type]
+    });
     FormArray = this.form.get('formarray') as FormArray;
     FormArray.push(add);
     console.log(FormArray);

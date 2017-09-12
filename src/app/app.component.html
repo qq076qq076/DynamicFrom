@@ -3,19 +3,27 @@
     <div class="col l6 center-align row">
       <div class="col l12">
         預覽區塊
-        <button (click)="AddItom()" mz-button>圖片</button>
-        <button (click)="AddItom()" mz-button>文字</button>
-        <button (click)="AddItom()" mz-button>影片</button>
+        <button (click)="AddItom('img')" mz-button>圖片</button>
+        <button (click)="AddItom('text')" mz-button>文字</button>
+        <button (click)="AddItom('video')" mz-button>影片</button>
       </div>
       <mz-card class="col l12">
         <mz-card-content>
           <form [formGroup]="form" class="row">
             <div formArrayName="formarray">
               <div class="col l12 row" *ngFor="let item of form.controls['formarray'].controls;let i = index" [formGroupName]="i">
-                <div>
+                <div *ngIf="item.controls['type'].value=='img'">
+                  <img src="http://fakeimg.pl/350x200/?text=Hello" width="100%">
+                </div>
+                <div *ngIf="item.controls['type'].value=='text'">
                   {{item.controls['data'].value}}
                 </div>
-                <input type="text" formControlName="data">
+                <div *ngIf="item.controls['type'].value=='video'">
+                    <iframe width="100%" src="https://www.youtube.com/embed/mrqKvu-rqIc" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div>
+                </div>
+                <!-- <input type="text" formControlName="data"> -->
               </div>
             </div>
           </form>
